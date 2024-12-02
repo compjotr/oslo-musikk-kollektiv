@@ -5,6 +5,12 @@ import { artists } from '../../../types/artists';
 import { SpotifyAlbum } from '@/types';
 import React from 'react';
 
+interface AlbumData {
+  albums: SpotifyAlbum[];
+  singles: SpotifyAlbum[];
+  appearsOn: SpotifyAlbum[];
+}
+
 export default async function ArtistPage({
   params,
 }: {
@@ -17,11 +23,16 @@ export default async function ArtistPage({
     notFound();
   }
 
-  let albums: SpotifyAlbum[] = [];
+  let albumData: AlbumData = {
+    albums: [],
+    singles: [],
+    appearsOn: []
+  };
+
   let spotifyInfo = null;
 
   if (artist.spotifyId) {
-    [albums, spotifyInfo] = await Promise.all([
+    [albumData, spotifyInfo] = await Promise.all([
       getArtistAlbums(artist.spotifyId),
       getArtistInfo(artist.spotifyId),
     ]);
@@ -31,7 +42,7 @@ export default async function ArtistPage({
     <ArtistDisplay
       artist={artist}
       spotifyInfo={spotifyInfo}
-      albums={albums}
+      albums={albumData}
     />
   );
 }

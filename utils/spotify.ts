@@ -20,17 +20,33 @@ async function getSpotifyAccessToken() {
 export async function getArtistAlbums(spotifyId: string) {
   const token = await getSpotifyAccessToken();
   
-  const response = await fetch(
-    `${SPOTIFY_API_BASE}/artists/${spotifyId}/albums?include_groups=album,single`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  // Fetch all types of releases
+  const [albums, singles, appearsOn] = await Promise.all([
+    fetch(
+      `${SPOTIFY_API_BASE}/artists/${spotifyId}/albums?include_groups=album`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    ).then(res => res.json()),
+    fetch(
+      `${SPOTIFY_API_BASE}/artists/${spotifyId}/albums?include_groups=single`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    ).then(res => res.json()),
+    fetch(
+      `${SPOTIFY_API_BASE}/artists/${spotifyId}/albums?include_groups=appears_on`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    ).then(res => res.json()),
+  ]);
 
-  const data = await response.json();
-  return data.items as SpotifyAlbum[];
+  return {
+    albums: albums.items as SpotifyAlbum[],
+    singles: singles.items as SpotifyAlbum[],
+    appearsOn: appearsOn.items as SpotifyAlbum[]
+  };
 }
 
 export async function getArtistInfo(spotifyId: string) {
