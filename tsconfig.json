@@ -2,11 +2,11 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "jsx": "preserve",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "jsx": "preserve",
     "lib": [
       "dom",
       "dom.iterable",

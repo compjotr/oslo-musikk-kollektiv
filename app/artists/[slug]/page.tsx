@@ -4,10 +4,14 @@ import { getArtistAlbums, getArtistInfo } from '../../../utils/spotify';
 import { SpotifyAlbum } from '../../../types/spotify';
 import { artistDetails } from '../../constants/artists';
 
+type PageProps = {
+  params: { slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
-
-export default async function ArtistPage({ params }: { params: { slug: string } }) {
-  const artist = artistDetails[params.slug];
+export default async function ArtistPage({ params }: PageProps) {
+  const { slug } = params;
+  const artist = artistDetails[slug];
 
   if (!artist) {
     return <p className="text-red-500">Artist not found.</p>;
@@ -15,10 +19,8 @@ export default async function ArtistPage({ params }: { params: { slug: string } 
 
   let albums: SpotifyAlbum[] = [];
   let spotifyInfo = null;
-  console.log(artist);
   
   if (artist.spotifyId) {
-    console.log('spotifyId', artist.spotifyId);
     [albums, spotifyInfo] = await Promise.all([
       getArtistAlbums(artist.spotifyId),
       getArtistInfo(artist.spotifyId)
