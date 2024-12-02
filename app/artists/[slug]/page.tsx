@@ -1,7 +1,7 @@
 import { getArtistAlbums, getArtistInfo } from '../../../utils/spotify';
 import { notFound } from 'next/navigation';
 import ArtistDisplay from '../../components/ArtistDisplay';
-import { artists } from '../../constants';
+import { artists } from '../../../types/artists';
 import { SpotifyAlbum } from '@/types';
 import React from 'react';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import ArtistCard from './components/ArtistCard';
-import { artists } from './constants';
+import { artists } from '../types/artists';
 
 export default function HomePage() {
   return (
