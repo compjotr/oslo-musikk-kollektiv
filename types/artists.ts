@@ -9,11 +9,11 @@ export const artists: Artist[] = [
     spotifyId: "45cJ57HdG3nN36kRmudbHq",
   },
   {
-    name: "Timmy",
-    slug: "timmy",
-    bio: "Details about Timmy.",
+    name: "Kognitiv Diskodans",
+    slug: "Kognitiv-Diskodans",
+    bio: "Details about Diskodans.",
     imageUrl: "/timmy.jpg",
-    spotifyId: "",
+    spotifyId: "5exUdipiSKHoecvUdF9kIt",
   },
   {
     name: "Anakin",

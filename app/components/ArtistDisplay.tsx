@@ -1,6 +1,8 @@
 import { Artist, SpotifyAlbum, SpotifyArtist } from "@/types";
 import Image from "next/image";
 import React from "react";
+import Button from "./ButtonComponent";
+
 interface ArtistDisplayProps {
   artist: Artist;
   spotifyInfo: SpotifyArtist | null;
@@ -21,9 +23,20 @@ export default function ArtistDisplay({
         </h1>
         <p className="text-lg text-gray-700">{artist.bio}</p>
         {spotifyInfo && (
-          <p className="text-sm text-gray-500 mt-2">
-            {spotifyInfo.followers.total.toLocaleString()} Spotify Followers
-          </p>
+          <>
+            <p className="text-sm text-gray-500 mt-2">
+              {spotifyInfo.followers.total.toLocaleString()} Spotify Followers
+            </p>
+            <div className="mt-4">
+              <Button
+                href={spotifyInfo.external_urls.spotify}
+                variant="spotify"
+                className="text-sm px-4 py-1.5"
+              >
+                Listen on Spotify
+              </Button>
+            </div>
+          </>
         )}
       </div>
 
@@ -46,7 +59,10 @@ export default function ArtistDisplay({
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {albums.map((album) => (
-              <div key={album.id} className="bg-white p-6 rounded-lg shadow-lg">
+              <div
+                key={album.id}
+                className="bg-white p-6 rounded-lg shadow-lg flex flex-col"
+              >
                 <Image
                   src={album.images[0]?.url || "/default-image.jpg"}
                   alt={album.name}
@@ -55,9 +71,18 @@ export default function ArtistDisplay({
                   className="w-full h-48 object-cover mb-4 rounded-lg shadow-md"
                 />
                 <h3 className="font-semibold text-gray-800">{album.name}</h3>
-                <p className="text-sm text-gray-600 mb-4">
+                <p className="text-sm text-gray-600 mb-2">
                   Released: {new Date(album.release_date).toLocaleDateString()}
                 </p>
+                <div className="mt-auto">
+                  <Button
+                    href={album.external_urls.spotify}
+                    variant="spotify"
+                    className="text-xs px-3 py-1"
+                  >
+                    Listen on Spotify
+                  </Button>
+                </div>
               </div>
             ))}
           </div>
