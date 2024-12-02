@@ -2,9 +2,9 @@ import { Artist } from "@/types";
 
 export const artists: Artist[] = [
   {
-    name: "Junger",
+    name: "Jünger",
     slug: "junger",
-    bio: "Details about Junger.",
+    bio: "Details about Jünger.",
     imageUrl: "/junger.jpg",
     spotifyId: "45cJ57HdG3nN36kRmudbHq",
   },

@@ -24,6 +24,6 @@
       "@/*": ["app/*"]
     }
   },
-  "include": ["app", ".next/types/**/*.ts", "types/artists.ts"],
+  "include": ["app", ".next/types/**/*.ts", "types/artists.ts", "types"],
   "exclude": ["node_modules"]
 }
